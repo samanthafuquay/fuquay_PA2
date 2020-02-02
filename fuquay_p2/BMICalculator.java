@@ -3,78 +3,112 @@ package fuquay_p2;
 import java.util.Scanner;
 
 public class BMICalculator {
-	public float weight;
-	public float height;
-	public float bmi;
-	public String category;
-	int choice = 0;
-	public static void main(String[] args) {
+	public  double weight;
+	public  double height;
+	public  double bmi;
+	public  String category;
+	public int choice = 0;
+	public boolean helper =false;
+	public void main(String[] args) {
+		readUserData();
+		calculateBmi(choice);
+		bmichart();
 		
 	}
 		Scanner scan = new Scanner(System.in);
 
 		public void readUserData(){
-			private void readUnitType() {
-				boolean helper = false;
-				while(helper = false) {
+			while(helper = false) {
 				System.out.println("What units would you like to calculate your BMI in today?");
 				System.out.println("For pounds and inches press 1");
 				System.out.println("For Kilograms and meters press2");
 				int choice = scan.nextInt();
-				}
-				if(choice = 1){
+				if(choice == 1) {
 					helper = true;
-					private  readImperialData() {
-						System.out.println("Please enter your weight");
-						setWeight = scan.nextInt();
-						if(weight <0) {
-							return;
-						}
-						System.out.println("Please enter your height");
-						setHeight = scan.nextInt();
-						if(height <0) {
-							return;
-						}
-					}
+					readUnitType(1);
 				}
-				if(choice = 2) {
+				else if(choice == 2) {
 					helper = true;
-					private readMetricData() {
-						System.out.println("Please enter your weight");
-						setWeight = scan.nextInt();
-						System.out.println("Please enter your height");
-						setHeight = scan.nextInt();
-					}
-				
+					readUnitType(2);
 				}
 			}
+
 		}
-		public void calculateBmi() {
-			if(choice =1) {
-				Bmi = getWeight/ (getHeight);//the height needs to be squared
-				System.out.printf("Your BMI = %.2f", Bmi)
+
+		private  void readUnitType(int choice) {
+				if(choice == 1) {
+					readImperialData();
+				}
+				if(choice == 2) {
+					readMetricData();
+				}
+		}
+		private  void  readImperialData() {
+				System.out.println("Please enter your weight");
+				double weight = scan.nextDouble();
+				setWeight(weight);
+				if(weight <0) {
+					return;
+				}
+				System.out.println("Please enter your height");
+				double height = scan.nextDouble();
+				setHeight(height);
+				if(height <0) {
+					return;
+				}
+			}
+		private void readMetricData() {
+				System.out.println("Please enter your weight");
+				float weight = scan.nextFloat();
+				setWeight(weight);
+				if(weight <0) {
+					return;
+				}
+				System.out.println("Please enter your height");
+				float height = scan.nextFloat();
+				setHeight(height);
+				if(height <0) {
+					return;
+				}
+			}
 				
+		public  void calculateBmi(int choice) {
+			if(choice == 1) {
+				double weight = getWeight();
+				double height = getHeight();
+				bmi = (weight)/(Math.pow(height, 2));
+				System.out.printf("Your BMI = %.f", bmi);	
 			}
 			else {
-				bmi= (703* getWeight )/ (getHeight);//need to square this
-				System.out.printf("Your BMI = %.2f", Bmi)
+				double weight = getWeight();
+				double height = getHeight();
+				bmi= (703* weight)/ ((Math.pow(height, 2)));
+				System.out.printf("Your BMI = %.2f", bmi);
 			}
-			private void calculateBmiCategory{
-				if(bmi <18.5) {
-				category =underweight;
-				}
-				if(bmi > 18.5 && <25) {
-					category =normal weight;
-				}
-				if(bmi >24 && < 30) {
-					category= overweight;
-				}
-				if(bmi >29) {
-					category =Obesity; 
-				}
-				System.out.printf("Your BMI category is %s", category);
-			}
+			calculateBmiCategory(bmi);
 		}
+		private  void calculateBmiCategory(double bmi){
+				if(bmi <18.5) {
+				category = "underweight";
+				System.out.println("Your BMI category is underweight");
+				return;
+				}
+				else if(bmi < 25) {
+					category = "normal weight";
+					System.out.println("Your BMI category is normal weight");
+					return;
+				}
+				else if(bmi < 30) {
+					category= "overweight";
+					System.out.println("Your BMI category is overweight");
+					return;
+				}
+				else if (bmi >29) {
+					category = "Obesity"; 
+					System.out.println("Your BMI category is obesity ");
+					return;
+				}
+			}
 		public void bmichart() {
 			System.out.printf("Underweight = <18.5\r\n" + 
 					"Normal weight = 18.5–24.9 \r\n" + 
@@ -83,19 +117,19 @@ public class BMICalculator {
 		}
 	
 			
-			public void setWeight(float weight) {
+			public void setWeight(double weight) {
 				this.weight = weight;
 			}
-			public float getWeight() {
+			public double getWeight() {
 				return weight;
 			}
-			public void setheight(float height) {
+			public void setHeight(double height) {
 				this.height = height;
 			}
-			public float getheight() {
+			public double getHeight() {
 				return height;
 			}
-			public float getBmi() {
+			public double getBmi() {
 				return bmi;
 			}
 			public String getBmiCategory() {
